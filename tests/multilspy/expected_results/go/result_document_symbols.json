@@ -1,0 +1,260 @@
+[
+  [
+    {
+      "location": {
+        "uri": "quotes.go",
+        "range": {
+          "start": {
+            "line": 8,
+            "character": 4
+          },
+          "end": {
+            "line": 8,
+            "character": 57
+          }
+        }
+      },
+      "name": "rng",
+      "kind": 13
+    },
+    {
+      "location": {
+        "uri": "quotes.go",
+        "range": {
+          "start": {
+            "line": 10,
+            "character": 5
+          },
+          "end": {
+            "line": 16,
+            "character": 1
+          }
+        }
+      },
+      "name": "Quoter",
+      "kind": 23
+    },
+    {
+      "location": {
+        "uri": "quotes.go",
+        "range": {
+          "start": {
+            "line": 18,
+            "character": 0
+          },
+          "end": {
+            "line": 32,
+            "character": 1
+          }
+        }
+      },
+      "name": "NewQuoter",
+      "kind": 12
+    },
+    {
+      "location": {
+        "uri": "quotes.go",
+        "range": {
+          "start": {
+            "line": 35,
+            "character": 0
+          },
+          "end": {
+            "line": 37,
+            "character": 1
+          }
+        }
+      },
+      "name": "(*Quoter).GetWisdom",
+      "kind": 6
+    },
+    {
+      "location": {
+        "uri": "quotes.go",
+        "range": {
+          "start": {
+            "line": 39,
+            "character": 0
+          },
+          "end": {
+            "line": 41,
+            "character": 1
+          }
+        }
+      },
+      "name": "(*Quoter).GetHumor",
+      "kind": 6
+    },
+    {
+      "location": {
+        "uri": "quotes.go",
+        "range": {
+          "start": {
+            "line": 43,
+            "character": 0
+          },
+          "end": {
+            "line": 45,
+            "character": 1
+          }
+        }
+      },
+      "name": "(*Quoter).GetPower",
+      "kind": 6
+    },
+    {
+      "location": {
+        "uri": "quotes.go",
+        "range": {
+          "start": {
+            "line": 47,
+            "character": 0
+          },
+          "end": {
+            "line": 49,
+            "character": 1
+          }
+        }
+      },
+      "name": "(*Quoter).GetKnowledge",
+      "kind": 6
+    },
+    {
+      "location": {
+        "uri": "quotes.go",
+        "range": {
+          "start": {
+            "line": 52,
+            "character": 0
+          },
+          "end": {
+            "line": 54,
+            "character": 1
+          }
+        }
+      },
+      "name": "(*Quoter).GetQuotes",
+      "kind": 6
+    },
+    {
+      "location": {
+        "uri": "quotes.go",
+        "range": {
+          "start": {
+            "line": 58,
+            "character": 0
+          },
+          "end": {
+            "line": 63,
+            "character": 1
+          }
+        }
+      },
+      "name": "(*Quoter).GetQuoteByIndex",
+      "kind": 6
+    },
+    {
+      "location": {
+        "uri": "quotes.go",
+        "range": {
+          "start": {
+            "line": 66,
+            "character": 0
+          },
+          "end": {
+            "line": 73,
+            "character": 1
+          }
+        }
+      },
+      "name": "(*Quoter).QuoteExists",
+      "kind": 6
+    },
+    {
+      "location": {
+        "uri": "quotes.go",
+        "range": {
+          "start": {
+            "line": 76,
+            "character": 0
+          },
+          "end": {
+            "line": 78,
+            "character": 1
+          }
+        }
+      },
+      "name": "(*Quoter).GetLifeQuote",
+      "kind": 6
+    },
+    {
+      "location": {
+        "uri": "quotes.go",
+        "range": {
+          "start": {
+            "line": 80,
+            "character": 0
+          },
+          "end": {
+            "line": 82,
+            "character": 1
+          }
+        }
+      },
+      "name": "(*Quoter).GetPasswordQuote",
+      "kind": 6
+    },
+    {
+      "location": {
+        "uri": "quotes.go",
+        "range": {
+          "start": {
+            "line": 84,
+            "character": 0
+          },
+          "end": {
+            "line": 91,
+            "character": 1
+          }
+        }
+      },
+      "name": "(*Quoter).GetWisdomQuote",
+      "kind": 6
+    },
+    {
+      "location": {
+        "uri": "quotes.go",
+        "range": {
+          "start": {
+            "line": 93,
+            "character": 0
+          },
+          "end": {
+            "line": 100,
+            "character": 1
+          }
+        }
+      },
+      "name": "(*Quoter).GetHumorQuote",
+      "kind": 6
+    },
+    {
+      "location": {
+        "uri": "quotes.go",
+        "range": {
+          "start": {
+            "line": 102,
+            "character": 0
+          },
+          "end": {
+            "line": 108,
+            "character": 1
+          }
+        }
+      },
+      "name": "(*Quoter).GetRandomQuote",
+      "kind": 6
+    }
+  ],
+  null
+]

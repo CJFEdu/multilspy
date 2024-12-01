@@ -1,0 +1,16 @@
+{
+  "contents": {
+    "kind": "markdown",
+    "value": "```go\nfunc quiz_logic.ShowMenu()\n```\n\n[`quiz_logic.ShowMenu` on pkg.go.dev](https://pkg.go.dev/quiz/quiz_logic#ShowMenu)"
+  },
+  "range": {
+    "start": {
+      "line": 22,
+      "character": 13
+    },
+    "end": {
+      "line": 22,
+      "character": 21
+    }
+  }
+}

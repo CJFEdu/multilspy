@@ -5,7 +5,7 @@ from multilspy.multilspy_config import Language
 
 TEST_REPO = {
     "url": "https://github.com/CJFEdu/lsp_test_project/",
-    "commit": "1745076eb7aac032a47e01822e0e395e64e9d7ff"
+    "commit": "5bae14332e090636f87a2ddf404e55c31e66bb94"
 }
 
 def setup_test_params(code_language: Language) -> dict:
@@ -23,3 +23,4 @@ def setup_test_params(code_language: Language) -> dict:
         "repo_url": TEST_REPO["url"],
         "repo_commit": TEST_REPO["commit"]
     }
+

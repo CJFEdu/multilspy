@@ -1,0 +1,198 @@
+[
+  {
+    "uri": "quotes.go",
+    "range": {
+      "start": {
+        "line": 18,
+        "character": 18
+      },
+      "end": {
+        "line": 18,
+        "character": 24
+      }
+    },
+    "relativePath": "quiz_logic/quotes.go"
+  },
+  {
+    "uri": "quotes.go",
+    "range": {
+      "start": {
+        "line": 19,
+        "character": 9
+      },
+      "end": {
+        "line": 19,
+        "character": 15
+      }
+    },
+    "relativePath": "quiz_logic/quotes.go"
+  },
+  {
+    "uri": "quotes.go",
+    "range": {
+      "start": {
+        "line": 35,
+        "character": 9
+      },
+      "end": {
+        "line": 35,
+        "character": 15
+      }
+    },
+    "relativePath": "quiz_logic/quotes.go"
+  },
+  {
+    "uri": "quotes.go",
+    "range": {
+      "start": {
+        "line": 39,
+        "character": 9
+      },
+      "end": {
+        "line": 39,
+        "character": 15
+      }
+    },
+    "relativePath": "quiz_logic/quotes.go"
+  },
+  {
+    "uri": "quotes.go",
+    "range": {
+      "start": {
+        "line": 43,
+        "character": 9
+      },
+      "end": {
+        "line": 43,
+        "character": 15
+      }
+    },
+    "relativePath": "quiz_logic/quotes.go"
+  },
+  {
+    "uri": "quotes.go",
+    "range": {
+      "start": {
+        "line": 47,
+        "character": 9
+      },
+      "end": {
+        "line": 47,
+        "character": 15
+      }
+    },
+    "relativePath": "quiz_logic/quotes.go"
+  },
+  {
+    "uri": "quotes.go",
+    "range": {
+      "start": {
+        "line": 52,
+        "character": 9
+      },
+      "end": {
+        "line": 52,
+        "character": 15
+      }
+    },
+    "relativePath": "quiz_logic/quotes.go"
+  },
+  {
+    "uri": "quotes.go",
+    "range": {
+      "start": {
+        "line": 58,
+        "character": 9
+      },
+      "end": {
+        "line": 58,
+        "character": 15
+      }
+    },
+    "relativePath": "quiz_logic/quotes.go"
+  },
+  {
+    "uri": "quotes.go",
+    "range": {
+      "start": {
+        "line": 66,
+        "character": 9
+      },
+      "end": {
+        "line": 66,
+        "character": 15
+      }
+    },
+    "relativePath": "quiz_logic/quotes.go"
+  },
+  {
+    "uri": "quotes.go",
+    "range": {
+      "start": {
+        "line": 76,
+        "character": 9
+      },
+      "end": {
+        "line": 76,
+        "character": 15
+      }
+    },
+    "relativePath": "quiz_logic/quotes.go"
+  },
+  {
+    "uri": "quotes.go",
+    "range": {
+      "start": {
+        "line": 80,
+        "character": 9
+      },
+      "end": {
+        "line": 80,
+        "character": 15
+      }
+    },
+    "relativePath": "quiz_logic/quotes.go"
+  },
+  {
+    "uri": "quotes.go",
+    "range": {
+      "start": {
+        "line": 84,
+        "character": 9
+      },
+      "end": {
+        "line": 84,
+        "character": 15
+      }
+    },
+    "relativePath": "quiz_logic/quotes.go"
+  },
+  {
+    "uri": "quotes.go",
+    "range": {
+      "start": {
+        "line": 93,
+        "character": 9
+      },
+      "end": {
+        "line": 93,
+        "character": 15
+      }
+    },
+    "relativePath": "quiz_logic/quotes.go"
+  },
+  {
+    "uri": "quotes.go",
+    "range": {
+      "start": {
+        "line": 102,
+        "character": 9
+      },
+      "end": {
+        "line": 102,
+        "character": 15
+      }
+    },
+    "relativePath": "quiz_logic/quotes.go"
+  }
+]

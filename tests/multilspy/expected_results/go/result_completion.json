@@ -1,0 +1,12 @@
+[
+  {
+    "completionText": "StartQuiz",
+    "detail": "func(quizPath string) error",
+    "kind": 3
+  },
+  {
+    "completionText": "ShowMenu",
+    "detail": "func()",
+    "kind": 3
+  }
+]

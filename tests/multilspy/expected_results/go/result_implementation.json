@@ -1,0 +1,41 @@
+[
+  {
+    "uri": "question.go",
+    "range": {
+      "start": {
+        "line": 32,
+        "character": 5
+      },
+      "end": {
+        "line": 32,
+        "character": 27
+      }
+    }
+  },
+  {
+    "uri": "question.go",
+    "range": {
+      "start": {
+        "line": 61,
+        "character": 5
+      },
+      "end": {
+        "line": 61,
+        "character": 22
+      }
+    }
+  },
+  {
+    "uri": "question.go",
+    "range": {
+      "start": {
+        "line": 91,
+        "character": 5
+      },
+      "end": {
+        "line": 91,
+        "character": 24
+      }
+    }
+  }
+]
