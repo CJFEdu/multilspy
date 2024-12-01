@@ -180,6 +180,7 @@ class GoplsServer(LanguageServer):
         self.server.on_notification("textDocument/publishDiagnostics", do_nothing)
         self.server.on_notification("language/actionableNotification", do_nothing)
         self.server.on_notification("textDocument/completion", do_nothing)
+        self.server.on_notification("textDocument/implementation", do_nothing)
 
         # Start gopls in server mode
         async with super().start_server():

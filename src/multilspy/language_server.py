@@ -100,6 +100,9 @@ class LanguageServer:
                 TypeScriptLanguageServer,
             )
             return TypeScriptLanguageServer(config, logger, repository_root_path)
+        elif config.code_language == Language.GO:
+            from multilspy.language_servers.gopls.gopls import GoplsServer
+            return GoplsServer(config, logger, repository_root_path)
         else:
             logger.log(f"Language {config.code_language} is not supported", logging.ERROR)
             raise MultilspyException(f"Language {config.code_language} is not supported")
@@ -226,6 +229,31 @@ class LanguageServer:
             )
             del self.open_file_buffers[uri]
 
+    def save_file(self, relative_file_path: str) -> None:
+        """
+        Save the file in the Language Server.
+
+        :param relative_file_path: The relative path of the file to save.
+        """
+        self._priv_check_server_started("save_file")
+
+        absolute_file_path = str(PurePath(self.repository_root_path, relative_file_path))
+        uri = pathlib.Path(absolute_file_path).as_uri()
+
+        # Ensure the file is open
+        assert uri in self.open_file_buffers
+
+        file_buffer = self.open_file_buffers[uri]
+
+        self.server.notify.did_save_text_document(
+            {
+                LSPConstants.TEXT_DOCUMENT: {
+                    LSPConstants.URI: uri,
+                    LSPConstants.VERSION: file_buffer.version
+                }
+            }
+        )
+        
     def insert_text_at_position(
         self, relative_file_path: str, line: int, column: int, text_to_be_inserted: str
     ) -> multilspy_types.Position:
@@ -238,12 +266,7 @@ class LanguageServer:
         :param column: The column number at which text should be inserted.
         :param text_to_be_inserted: The text to insert.
         """
-        if not self.server_started:
-            self.logger.log(
-                "insert_text_at_position called before Language Server started",
-                logging.ERROR,
-            )
-            raise MultilspyException("Language Server not started")
+        self._priv_check_server_started("insert_text_at_position")
 
         absolute_file_path = str(PurePath(self.repository_root_path, relative_file_path))
         uri = pathlib.Path(absolute_file_path).as_uri()
@@ -286,12 +309,7 @@ class LanguageServer:
         """
         Delete text between the given start and end positions in the given file and return the deleted text.
         """
-        if not self.server_started:
-            self.logger.log(
-                "insert_text_at_position called before Language Server started",
-                logging.ERROR,
-            )
-            raise MultilspyException("Language Server not started")
+        self._priv_check_server_started("delete_text_between_positions")
 
         absolute_file_path = str(PurePath(self.repository_root_path, relative_file_path))
         uri = pathlib.Path(absolute_file_path).as_uri()
@@ -322,12 +340,7 @@ class LanguageServer:
 
         :param relative_file_path: The relative path of the file to open.
         """
-        if not self.server_started:
-            self.logger.log(
-                "get_open_file_text called before Language Server started",
-                logging.ERROR,
-            )
-            raise MultilspyException("Language Server not started")
+        self._priv_check_server_started("get_open_file_text")
 
         absolute_file_path = str(PurePath(self.repository_root_path, relative_file_path))
         uri = pathlib.Path(absolute_file_path).as_uri()
@@ -337,6 +350,45 @@ class LanguageServer:
 
         file_buffer = self.open_file_buffers[uri]
         return file_buffer.contents
+
+    async def request_implementation(
+        self, relative_file_path: str, line: int, column: int
+    ) -> List[multilspy_types.Location]:
+        """
+        Raise a [textDocument/implementation](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#textDocument_implementation) request to the Language Server
+        for the symbol at the given line and column in the given file. Wait for the response and return the result.
+
+        :param relative_file_path: The relative path of the file that has the symbol for which implementation should be looked up
+        :param line: The line number of the symbol
+        :param column: The column number of the symbol
+
+        :return List[multilspy_types.Location]: A list of locations where the symbol is implemented
+        """
+        self._priv_check_server_started("request_implementation")
+
+        with self.open_file(relative_file_path):
+            # sending request to the language server and waiting for response
+            response = await self.server.send.implementation(
+                {
+                    LSPConstants.TEXT_DOCUMENT: {
+                        LSPConstants.URI: pathlib.Path(
+                            str(PurePath(self.repository_root_path, relative_file_path))
+                        ).as_uri()
+                    },
+                    LSPConstants.POSITION: {
+                        LSPConstants.LINE: line,
+                        LSPConstants.CHARACTER: column,
+                    },
+                }
+            )
+
+            if response is None:
+                return []
+
+            if not isinstance(response, list):
+                response = [response]
+
+            return [multilspy_types.Location(**location) for location in response]
 
     async def request_definition(
         self, relative_file_path: str, line: int, column: int
@@ -352,12 +404,7 @@ class LanguageServer:
         :return List[multilspy_types.Location]: A list of locations where the symbol is defined
         """
 
-        if not self.server_started:
-            self.logger.log(
-                "find_function_definition called before Language Server started",
-                logging.ERROR,
-            )
-            raise MultilspyException("Language Server not started")
+        self._priv_check_server_started("request_definition")
 
         with self.open_file(relative_file_path):
             # sending request to the language server and waiting for response
@@ -435,12 +482,7 @@ class LanguageServer:
         :return List[multilspy_types.Location]: A list of locations where the symbol is referenced
         """
 
-        if not self.server_started:
-            self.logger.log(
-                "find_all_callers_of_function called before Language Server started",
-                logging.ERROR,
-            )
-            raise MultilspyException("Language Server not started")
+        self._priv_check_server_started("request_references")
 
         with self.open_file(relative_file_path):
             # sending request to the language server and waiting for response
@@ -484,6 +526,8 @@ class LanguageServer:
 
         :return List[multilspy_types.CompletionItem]: A list of completions
         """
+        self._priv_check_server_started("request_completions")
+
         with self.open_file(relative_file_path):
             open_file_buffer = self.open_file_buffers[
                 pathlib.Path(os.path.join(self.repository_root_path, relative_file_path)).as_uri()
@@ -574,6 +618,8 @@ class LanguageServer:
 
         :return Tuple[List[multilspy_types.UnifiedSymbolInformation], Union[List[multilspy_types.TreeRepr], None]]: A list of symbols in the file, and the tree representation of the symbols
         """
+        self._priv_check_server_started("request_document_symbols")
+
         with self.open_file(relative_file_path):
             response = await self.server.send.document_symbol(
                 {
@@ -621,6 +667,7 @@ class LanguageServer:
 
         :return None
         """
+        self._priv_check_server_started("request_hover")
         with self.open_file(relative_file_path):
             response = await self.server.send.hover(
                 {
@@ -640,6 +687,20 @@ class LanguageServer:
         assert isinstance(response, dict)
 
         return multilspy_types.Hover(**response)
+
+    def _priv_check_server_started(self, function_name: str) -> None:
+        """
+        Check if the language server has started, raise an exception if not.
+
+        :param function_name: The name of the function being called
+        :raises MultilspyException: If the language server has not been started
+        """
+        if not self.server_started:
+            self.logger.log(
+                function_name + " called before Language Server started",
+                logging.ERROR,
+            )
+            raise MultilspyException("Language Server not started")
 
 @ensure_all_methods_implemented(LanguageServer)
 class SyncLanguageServer:
@@ -730,6 +791,22 @@ class SyncLanguageServer:
         self.loop.call_soon_threadsafe(self.loop.stop)
         loop_thread.join()
 
+    def request_implementation(self, file_path: str, line: int, column: int) -> List[multilspy_types.Location]:
+        """
+        Raise a [textDocument/implementation](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#textDocument_implementation) request to the Language Server
+        for the symbol at the given line and column in the given file. Wait for the response and return the result.
+
+        :param relative_file_path: The relative path of the file that has the symbol for which implementation should be looked up
+        :param line: The line number of the symbol
+        :param column: The column number of the symbol
+
+        :return List[multilspy_types.Location]: A list of locations where the symbol is implemented
+        """
+        result = asyncio.run_coroutine_threadsafe(
+            self.language_server.request_implementation(file_path, line, column), self.loop
+        ).result()
+        return result
+    
     def request_definition(self, file_path: str, line: int, column: int) -> List[multilspy_types.Location]:
         """
         Raise a [textDocument/definition](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#textDocument_definition) request to the Language Server
@@ -810,3 +887,11 @@ class SyncLanguageServer:
             self.language_server.request_hover(relative_file_path, line, column), self.loop
         ).result()
         return result
+
+    def save_file(self, relative_file_path: str) -> None:
+        """
+        Save the file in the Language Server.
+
+        :param relative_file_path: The relative path of the file to save.
+        """
+        self.language_server.save_file(relative_file_path)

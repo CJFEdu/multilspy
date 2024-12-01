@@ -10,6 +10,10 @@
     "rootUri": "$rootUri",
     "capabilities": {
         "textDocument": {
+            "implementation": {
+                "dynamicRegistration": true,
+                "linkSupport": true
+            },
             "hover": {
                 "dynamicRegistration": true,
                 "contentFormat": [
